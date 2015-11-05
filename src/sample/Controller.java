@@ -2,6 +2,7 @@ package sample;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.scene.control.*;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
@@ -21,6 +22,7 @@ public class Controller {
     public CheckMenuItem Arial;
     public CheckMenuItem CoSans ;
     public CheckMenuItem Verdana;
+
 
 
     private static final String defaultFileName = "sense_nom.txt";
@@ -93,7 +95,6 @@ public class Controller {
         alert.setTitle("Help");
         alert.setHeaderText("Editor de Text");
         alert.setContentText("Editor de text sencill");
-
         alert.showAndWait();
     }
 
@@ -154,7 +155,8 @@ public class Controller {
      * Metode Buscador per saber on guardar el arxiu
      */
 
-    public void save(ActionEvent actionEvent) {
+    public void save(ActionEvent actionEvent)
+    {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Guardar arxiu");
         fileChooser.setInitialFileName(defaultFileName);
@@ -179,6 +181,8 @@ public class Controller {
             e.printStackTrace();
         }
     }
+
+
 
 
 
