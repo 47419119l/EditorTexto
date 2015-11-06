@@ -22,6 +22,8 @@ public class Controller {
     public CheckMenuItem Arial;
     public CheckMenuItem CoSans ;
     public CheckMenuItem Verdana;
+    public String path ;
+    boolean obrir = false;
 
 
 
@@ -120,6 +122,8 @@ public class Controller {
 
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(stage);
+        path =file.getAbsolutePath();
+        obrir=true;
         lleguirFitxer(file);
 
     }
@@ -157,11 +161,25 @@ public class Controller {
 
     public void save(ActionEvent actionEvent)
     {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Guardar arxiu");
-        fileChooser.setInitialFileName(defaultFileName);
-        File file = fileChooser.showSaveDialog(stage);
-        crearFitxer(file);
+        if(obrir){
+            File file = new File(path);
+            String txt = textArea.getText();
+            try {
+                file.createNewFile();
+                FileWriter writer = new FileWriter(file);
+                writer.write(txt);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else {
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Guardar arxiu");
+            fileChooser.setInitialFileName(defaultFileName);
+            File file = fileChooser.showSaveDialog(stage);
+            crearFitxer(file);
+        }
     }
 
     /**
