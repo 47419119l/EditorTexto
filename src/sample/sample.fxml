@@ -16,9 +16,10 @@
             <menus>
                 <Menu mnemonicParsing="false" text="Fitxer">
                     <items>
-                        <MenuItem fx:id="close" mnemonicParsing="false" onAction="#close" text="Sortir" />
-                        <MenuItem fx:id="obrir" mnemonicParsing="false" onAction="#obrir" text="Obrir.." />
+                        <MenuItem fx:id="new" mnemonicParsing="false" onAction="#nou_archiu" text="Nou archiu" />
+                        <MenuItem fx:id="open" mnemonicParsing="false" onAction="#obrir" text="Obrir.." />
                         <MenuItem fx:id="guardar" mnemonicParsing="false" onAction="#save" text="guardar" />
+                        <MenuItem fx:id="close" mnemonicParsing="false" onAction="#close" text="Sortir" />
 
                     </items>
                 </Menu>
@@ -116,6 +117,7 @@
                     </ImageView>
                 </graphic>
             </Button>
+
 
 
 

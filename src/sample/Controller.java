@@ -3,6 +3,7 @@ package sample;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
@@ -11,6 +12,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.font.TextAttribute;
 import java.io.*;
 
 public class Controller {
@@ -23,6 +25,8 @@ public class Controller {
     public CheckMenuItem CoSans ;
     public CheckMenuItem Verdana;
     public String path ;
+    CheckMenuItem font;
+    @FXML
     boolean obrir = false;
 
 
@@ -34,8 +38,9 @@ public class Controller {
      * @param actionEvent
      */
 
+
     public void font(ActionEvent actionEvent) {
-        CheckMenuItem font = (CheckMenuItem) actionEvent.getSource();
+        font = (CheckMenuItem) actionEvent.getSource();
         /*
         Posem al false tots els checkmenu
          */
@@ -116,15 +121,23 @@ public class Controller {
      */
     public void undo(ActionEvent actionEvent) {
         textArea.undo();
+
     }
+
 
     public void obrir(ActionEvent actionEvent) {
 
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(stage);
+        /*
+        Guardo la ruta del fitcher per a despres si apreto a guardar poder a la mateixa ruta sense tenir que buscar el ficher
+        amb el Filechooser
+         */
         path =file.getAbsolutePath();
         obrir=true;
         lleguirFitxer(file);
+
+
 
     }
 
@@ -138,7 +151,7 @@ public class Controller {
         FileReader fr = null;
         BufferedReader br = null;
         String linea="";
-        String espacio=" ";
+        String espacio="\n";
 
         try {
             fr = new FileReader (file);
@@ -169,6 +182,7 @@ public class Controller {
                 FileWriter writer = new FileWriter(file);
                 writer.write(txt);
                 writer.close();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -200,8 +214,20 @@ public class Controller {
         }
     }
 
+    /**
+     * Modul per crear un nou archiu.
+     * @param actionEvent
+     */
+    public void nou_archiu(ActionEvent actionEvent) {
 
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("ATENCIO");
+        alert.setContentText("Si no has guardat el text es borrara!!!!");
+        alert.showAndWait();
+        textArea.setText("");
+        obrir=false;
 
+    }
 
 
 
