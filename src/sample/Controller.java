@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.font.TextAttribute;
 import java.io.*;
+import java.util.Optional;
 
 public class Controller {
 
@@ -28,6 +29,7 @@ public class Controller {
     CheckMenuItem font;
     @FXML
     boolean obrir = false;
+
 
 
 
@@ -174,6 +176,7 @@ public class Controller {
 
     public void save(ActionEvent actionEvent)
     {
+      
         if(obrir){
             File file = new File(path);
             String txt = textArea.getText();
@@ -220,12 +223,31 @@ public class Controller {
      */
     public void nou_archiu(ActionEvent actionEvent) {
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("ATENCIO");
-        alert.setContentText("Si no has guardat el text es borrara!!!!");
-        alert.showAndWait();
-        textArea.setText("");
-        obrir=false;
+
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Nou fitxer");
+            alert.setHeaderText("");
+            alert.setContentText("Vols guardar els canvis realitzats aquest fitcher ?");
+
+            ButtonType buttonTypeYes = new ButtonType("Si");
+            ButtonType buttonTypeNo = new ButtonType("No");
+            ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo, buttonTypeCancel);
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == buttonTypeYes) {
+                save(actionEvent);
+            } else if (result.get() == buttonTypeNo) {
+
+                textArea.setText("");
+                obrir=false;
+
+            } else {
+
+            }
+            obrir=false;
+
+
 
     }
 
